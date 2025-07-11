@@ -17,10 +17,11 @@ ssize_t ft_write(int fd, const void *buf, size_t count);
 ssize_t ft_read(int fd, void *buf, size_t count);
 char *ft_strdup(const char *s);
 int ft_atoi_base(const char *str, const char *base);
-/*
 void ft_list_push_front(t_list **begin_list, void *data);
 int ft_list_size(t_list *begin_list);
 void ft_list_sort(t_list **begin_list, int (*cmp)());
+
+/*
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 */
 
@@ -80,31 +81,33 @@ int main(void)
 	printf("ft_atoi_base (2A, base 16): %d\n", ft_atoi_base("2A", "0123456789ABCDEF"));
 	printf("ft_atoi_base (1010, base 2): %d\n", ft_atoi_base("1010", "01"));
 
-	/*
 	t_list *list = NULL;
-	ft_list_push_front(&list, strdup("third"));
-	ft_list_push_front(&list, strdup("second"));
-	ft_list_push_front(&list, strdup("first"));
+	ft_list_push_front(&list, ft_strdup("d"));
+	ft_list_push_front(&list, ft_strdup("b"));
+	ft_list_push_front(&list, ft_strdup("c"));
+	ft_list_push_front(&list, ft_strdup("e"));
+	ft_list_push_front(&list, ft_strdup("a"));
 
 	printf("List after push_front:\n");
 	print_list(list);
-	printf("ft_list_size: %d\n", ft_list_size(list));
 
+	printf("ft_list_size: %d\n", ft_list_size(list));
 	ft_list_sort(&list, (int (*)(void *, void *))strcmp);
 	printf("List after sort:\n");
 	print_list(list);
+	/*
+		ft_list_remove_if(&list, "second", (int (*)(void *, void *))strcmp, free_data);
+		printf("List after remove_if(\"second\"):\n");
+		print_list(list);
 
-	ft_list_remove_if(&list, "second", (int (*)(void *, void *))strcmp, free_data);
-	printf("List after remove_if(\"second\"):\n");
-	print_list(list);
-
-	while (list)
-	{
-		t_list *tmp = list;
-		list = list->next;
-		free(tmp->data);
-		free(tmp);
-	}*/
+		while (list)
+		{
+			t_list *tmp = list;
+			list = list->next;
+			free(tmp->data);
+			free(tmp);
+		}
+	*/
 
 	return 0;
 }

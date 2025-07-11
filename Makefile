@@ -13,9 +13,9 @@ ASM_SRC     = ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup
 
 ASM_OBJ     = $(ASM_SRC:.s=.o)
 
-BONUS_SRC   = ft_atoi_base_bonus.s
-#ft_list_push_front_bonus.s \
-              ft_list_size_bonus.s ft_list_sort_bonus.s ft_list_remove_if_bonus.s
+BONUS_SRC   = ft_atoi_base_bonus.s ft_list_push_front_bonus.s \
+	ft_list_size_bonus.s ft_list_sort_bonus.s
+#ft_list_remove_if_bonus.s
 BONUS_OBJ   = $(BONUS_SRC:.s=.o)
 
 TEST_SRC    = main.c
@@ -35,6 +35,8 @@ $(NAME): $(ASM_OBJ)
 test: $(NAME) $(TEST_OBJ) $(BONUS_OBJ)
 	@$(CC) $(TEST_OBJ) $(BONUS_OBJ) -L. -lasm -o $(TEST_NAME)
 	@./$(TEST_NAME)
+	@rm -f $(ASM_OBJ) $(BONUS_OBJ) $(TEST_OBJ)
+	@rm -f $(NAME) $(TEST_NAME)
 
 bonus: $(BONUS_OBJ)
 	$(AR) $(NAME) $(BONUS_OBJ)

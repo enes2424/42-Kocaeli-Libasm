@@ -12,7 +12,7 @@ ft_atoi_base:
     jl      .invalid_base
     jmp     .skip_whitespace
 
-.invalid_base
+.invalid_base:
     mov     rax, 0
     ret
 
