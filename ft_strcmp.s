@@ -13,12 +13,15 @@ ft_strcmp:
     inc     rsi
     inc     rdi
     jmp     .loop
-.equal
+
+.equal:
     mov   rax, 0
-    ret 
-.greater
+    ret
+
+.greater:
     mov   rax, 1
     ret
-.less
+
+.less:
     mov   rax, -1
     ret

@@ -15,10 +15,9 @@ char *ft_strcpy(char *dst, const char *src);
 int ft_strcmp(const char *s1, const char *s2);
 ssize_t ft_write(int fd, const void *buf, size_t count);
 ssize_t ft_read(int fd, void *buf, size_t count);
-/*
 char *ft_strdup(const char *s);
-
 int ft_atoi_base(const char *str, const char *base);
+/*
 void ft_list_push_front(t_list **begin_list, void *data);
 int ft_list_size(t_list *begin_list);
 void ft_list_sort(t_list **begin_list, int (*cmp)());
@@ -55,8 +54,6 @@ int main(void)
 
 	printf("ft_strcmp (equal): %d\n", ft_strcmp("abc", "abc"));
 	printf("ft_strcmp (diff):  %d\n", ft_strcmp("abz", "abd"));
-	printf("strcmp (equal): %d\n", strcmp("abc", "abc"));
-	printf("strcmp (diff):  %d\n", strcmp("abz", "abd"));
 
 	ssize_t ret = ft_write(1, "ft_write: Hello\n", 16);
 	printf("ft_write return: %zd | errno: %d\n", ret, errno);
@@ -75,17 +72,15 @@ int main(void)
 		perror("ft_read");
 	}
 
-	/*
-
 	char *dup = ft_strdup("duplicate me");
 	printf("ft_strdup: %s\n", dup);
 	free(dup);
-	/*
 
 	printf("ft_atoi_base (42, base 10): %d\n", ft_atoi_base("42", "0123456789"));
 	printf("ft_atoi_base (2A, base 16): %d\n", ft_atoi_base("2A", "0123456789ABCDEF"));
 	printf("ft_atoi_base (1010, base 2): %d\n", ft_atoi_base("1010", "01"));
 
+	/*
 	t_list *list = NULL;
 	ft_list_push_front(&list, strdup("third"));
 	ft_list_push_front(&list, strdup("second"));

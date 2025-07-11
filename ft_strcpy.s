@@ -3,14 +3,16 @@ section .text
 
 ft_strcpy:
     mov     rax, rdi
+
 .loop:
-    mov     al, [rsi]
-    test    al, al
+    mov     dl, [rsi]
+    test    dl, dl
     jz      .done
-    mov     [rdi], al
+    mov     [rdi], dl
     inc     rsi
     inc     rdi
     jmp     .loop
+
 .done:
     mov     byte [rdi], 0
     ret

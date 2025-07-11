@@ -1,20 +1,25 @@
 section .text
-    global ft_read
+    global ft_strdup
     extern malloc
     extern __errno_location
+    extern ft_strlen
+    extern ft_strcpy
 
-ft_read:
-    mov     rax, 0
-    syscall
-    cmp     rax, 0
-    jl      .read_failed
+ft_strdup:
+    push    rdi
+    call    ft_strlen
+    mov     rdi, rax
+    inc     rdi
+    call    malloc wrt ..plt
+    test    rax, rax
+    jz      .malloc_failed
+    mov     rdi, rax
+    pop     rsi
+    call    ft_strcpy
     ret
 
-.read_failed:
-    push    rax
+.malloc_failed:
     call    __errno_location wrt ..plt
-    pop     rcx
-    neg     rcx
-    mov     [rax], ecx
-    mov     rax, -1
+    mov     dword [rax], 12
+    mov     rax, 0
     ret
