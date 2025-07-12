@@ -20,15 +20,7 @@ int ft_atoi_base(const char *str, const char *base);
 void ft_list_push_front(t_list **begin_list, void *data);
 int ft_list_size(t_list *begin_list);
 void ft_list_sort(t_list **begin_list, int (*cmp)());
-
-/*
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
-*/
-
-int int_cmp(void *a, void *b)
-{
-	return (*(char *)a - *(char *)b);
-}
 
 void free_data(void *data)
 {
@@ -43,11 +35,6 @@ void print_list(t_list *lst)
 		lst = lst->next;
 	}
 	printf("NULL\n");
-}
-
-int strcmp_adapter(void *a, void *b)
-{
-	return strcmp((char *)a, (char *)b);
 }
 
 int main(void)
@@ -97,22 +84,20 @@ int main(void)
 	print_list(list);
 
 	printf("ft_list_size: %d\n", ft_list_size(list));
-	ft_list_sort(&list, strcmp_adapter);
+	ft_list_sort(&list, strcmp);
 	printf("List after sort:\n");
 	print_list(list);
-	/*
-		ft_list_remove_if(&list, "second", (int (*)(void *, void *))strcmp, free_data);
-		printf("List after remove_if(\"second\"):\n");
-		print_list(list);
+	ft_list_remove_if(&list, "d", strcmp, free_data);
+	printf("List after remove_if(\"d\"):\n");
+	print_list(list);
 
-		while (list)
-		{
-			t_list *tmp = list;
-			list = list->next;
-			free(tmp->data);
-			free(tmp);
-		}
-	*/
+	while (list)
+	{
+		t_list *tmp = list;
+		list = list->next;
+		free(tmp->data);
+		free(tmp);
+	}
 
 	return 0;
 }

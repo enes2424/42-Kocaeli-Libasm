@@ -2,56 +2,54 @@ section .text
     global ft_list_sort
 
 ft_list_sort:
-.start:
+.bubble_sort_start:
     mov     r9, 0
     mov     rax, [rdi]
+    test    rax, rax
+    jz      .exit
     mov     rcx, [rax + 8]
     test    rcx, rcx
-    jz      .done
+    jz      .exit
     push    rdi
     mov     rdi, [rax]
-    mov     rdx, rsi
     push    rsi
     mov     rsi, [rcx]
     push    r9
-    call    rdx
+    call    [rsp + 8]
     pop     r9
     pop     rsi
     pop     rdi
-    cmp     rax, 0
-    jg     .swap
+    cmp     eax, 0
+    jg      .swap_first_two
     mov     rax, [rdi]
+
+.traverse_and_compare:
     mov     rcx, [rax + 8]
     mov     rdx, [rcx + 8]
-
-.loop:
     test    rdx, rdx
-    jz      .done
+    jz      .check_if_done
     push    rax
     push    rdi
     mov     rdi, [rcx]
-    mov     r8, rsi
     push    rsi
     mov     rsi, [rdx]
     push    r9
-    call    r8
+    call    [rsp + 8]
     pop     r9
     pop     rsi
     pop     rdi
-    cmp     rax, 0
-    jg     .swap2
+    cmp     eax, 0
+    jg      .swap_others
     pop     rax
     mov     rax, [rax + 8]
-    mov     rcx, [rax + 8]
-    mov     rdx, [rcx + 8]
-    jmp    .loop
+    jmp     .traverse_and_compare
 
-.done:
+.check_if_done:
     cmp     r9, 1
-    je      .start
+    je      .bubble_sort_start
     ret
 
-.swap:
+.swap_first_two:
     mov     r9, 1
     mov     rax, [rdi]
     mov     rcx, [rax + 8]
@@ -60,10 +58,9 @@ ft_list_sort:
     mov     [rcx + 8], rax
     mov     [rdi], rcx
     mov     rax, [rdi]
-    mov     rcx, [rax + 8]
-    jmp     .loop
+    jmp     .traverse_and_compare
 
-.swap2:
+.swap_others:
     mov     r9, 1
     pop     rax
     mov     rcx, [rax + 8]
@@ -73,5 +70,7 @@ ft_list_sort:
     mov     [rdx + 8], rcx
     mov     [rcx + 8], r8
     mov     rax, rdx
-    mov     rdx, r8
-    jmp     .loop
+    jmp     .traverse_and_compare
+
+.exit:
+    ret
