@@ -45,6 +45,11 @@ void print_list(t_list *lst)
 	printf("NULL\n");
 }
 
+int strcmp_adapter(void *a, void *b)
+{
+	return strcmp((char *)a, (char *)b);
+}
+
 int main(void)
 {
 	printf("ft_strlen: %zu\n", ft_strlen("Hello world"));
@@ -82,17 +87,17 @@ int main(void)
 	printf("ft_atoi_base (1010, base 2): %d\n", ft_atoi_base("1010", "01"));
 
 	t_list *list = NULL;
-	ft_list_push_front(&list, ft_strdup("d"));
-	ft_list_push_front(&list, ft_strdup("b"));
-	ft_list_push_front(&list, ft_strdup("c"));
-	ft_list_push_front(&list, ft_strdup("e"));
 	ft_list_push_front(&list, ft_strdup("a"));
+	ft_list_push_front(&list, ft_strdup("e"));
+	ft_list_push_front(&list, ft_strdup("c"));
+	ft_list_push_front(&list, ft_strdup("b"));
+	ft_list_push_front(&list, ft_strdup("d"));
 
 	printf("List after push_front:\n");
 	print_list(list);
 
 	printf("ft_list_size: %d\n", ft_list_size(list));
-	ft_list_sort(&list, (int (*)(void *, void *))strcmp);
+	ft_list_sort(&list, strcmp_adapter);
 	printf("List after sort:\n");
 	print_list(list);
 	/*
