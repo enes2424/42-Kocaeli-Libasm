@@ -9,5 +9,5 @@ ft_list_size:
     inc     rax
     mov     rdi, [rdi + 8]
     jmp     .loop
-.done
+.done:
     ret

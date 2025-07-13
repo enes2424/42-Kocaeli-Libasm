@@ -4,8 +4,8 @@ section .text
 ft_strcmp:
 .loop:
     mov     al, [rdi]
-    mov     bl, [rsi]
-    cmp     al, bl
+    mov     dl, [rsi]
+    cmp     al, dl
     jg      .greater
     jl      .less
     test    al, al

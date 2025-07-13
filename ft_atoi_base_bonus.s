@@ -1,11 +1,52 @@
 section .text
     global ft_atoi_base
-    extern ft_strlen
+
+ft_control_and_strlen:
+    mov     rax, rdi
+
+.loop:
+    mov     cl, [rax]
+    cmp     cl, 0
+    je      .done
+    cmp     cl, '+'
+    je      .done_with_error
+    cmp     cl, '-'
+    je      .done_with_error
+    cmp     cl, ' '
+    je      .done_with_error
+    cmp     cl, 9
+    jl      .control_dup
+    cmp     cl, 13
+    jg      .control_dup
+    jmp     .done_with_error
+
+.control_dup:
+    mov     rdx, rdi
+
+.loop2:
+    cmp     rdx, rax
+    je      .skip
+    cmp     [rdx], cl
+    je      .done_with_error
+    inc     rdx
+    jmp     .loop2  
+
+.skip:
+    inc     rax
+    jmp     .loop
+
+.done:
+    sub     rax, rdi
+    ret
+
+.done_with_error:
+    mov     rax, -1
+    ret
 
 ft_atoi_base:
     push    rdi
     mov     rdi, rsi
-    call    ft_strlen
+    call    ft_control_and_strlen
     mov     rcx, rax
     pop     rdi
     cmp     rcx, 2
@@ -18,7 +59,7 @@ ft_atoi_base:
 
 .skip_whitespace:
     mov     dl, [rdi]
-    cmp     dl, 32
+    cmp     dl, ' '
     je      .advance_whitespace
     cmp     dl, 9
     jl      .check_sign
