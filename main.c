@@ -54,7 +54,7 @@ int main(void)
 	char buffer[100];
 	int fd = 0;
 	printf("Enter something for ft_read: ");
-	ret = read(fd, buffer, 99);
+	ret = ft_read(fd, buffer, 99);
 	if (ret >= 0)
 	{
 		buffer[ret] = '\0';
