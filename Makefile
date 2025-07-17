@@ -29,7 +29,7 @@ $(NAME): $(ASM_OBJ)
 	$(NASM) $(NASMFLAGS) $< -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $
+	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: .bonus
 
